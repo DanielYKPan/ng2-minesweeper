@@ -1,0 +1,33 @@
+@import '../../styles/utils/variables';
+
+$tile-width: 2rem;
+
+.board {
+  margin: 1rem;
+
+  &.beginner {
+    width: $tile-width * 9;
+  }
+}
+
+.header {
+  display: flex;
+  padding: $base-line-height 0;
+  background-color: #FB6648;
+  border: 1px solid rgba(0,0,0,0.3);
+  text-align: center;
+
+  .header-left,
+  .header-right {
+    width: 25%;
+  }
+
+  .smiley {
+    width: 50%;
+    img {
+      width: 20%;
+      max-width: 60px;
+      cursor: pointer;
+    }
+  }
+}

@@ -3,7 +3,7 @@
  */
 
 import { Component, OnInit } from "@angular/core";
-import { GameLevelService } from "./game-level.service";
+import { GameLevelService, ILevel } from "./game-level.service";
 
 @Component({
     selector: 'app-game-board',
@@ -12,9 +12,13 @@ import { GameLevelService } from "./game-level.service";
 })
 
 export class GameBoardComponent implements OnInit {
+
+    private level: ILevel;
+
     constructor( private gameLevel: GameLevelService ) {
     }
 
     ngOnInit(): void {
+        this.level = this.gameLevel.GameLevel;
     }
 }
