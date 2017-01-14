@@ -4,7 +4,7 @@
 
 import { Injectable } from '@angular/core';
 import { Store } from "@ngrx/store";
-import { STORE_TILES } from "./actions.const";
+import { STORE_TILES, REVEAL_TILE, UNCOVER_TILE, COVER_TILE } from "./actions.const";
 import { Tile } from "./tile";
 import { GameLevelService } from "./game-level.service";
 
@@ -31,6 +31,23 @@ export class GameService {
         tiles = this.shuffle(tiles);
         tiles = this.setTilesContent(tiles);
         this.store.dispatch({type: STORE_TILES, payload: {tiles}});
+    }
+
+    public clickTile( tile: Tile ): void {
+        this.store.dispatch({type: REVEAL_TILE, payload: tile.Id});
+        return;
+    }
+
+    public coverTile( tile: Tile ): void {
+        if (tile.Revealed) return;
+
+        if (tile.Covered) {
+            this.store.dispatch({type: UNCOVER_TILE, payload: tile.Id});
+            return;
+        } else {
+            this.store.dispatch({type: COVER_TILE, payload: tile.Id});
+            return;
+        }
     }
 
     private buildTileGrid(): Tile[] {
@@ -91,7 +108,7 @@ export class GameService {
         return tiles;
     }
 
-    private static getNeighbourTiles(tile: Tile, tiles: Tile[], width: number, height: number, cb: ( t: Tile )=>any ) {
+    private static getNeighbourTiles( tile: Tile, tiles: Tile[], width: number, height: number, cb: ( t: Tile ) => any ) {
         for (let i = 0; i < traversalPaths.length; i++) {
             let neighbour_x = tile.Coordination.x + traversalPaths[i].x,
                 neighbour_y = tile.Coordination.y + traversalPaths[i].y;

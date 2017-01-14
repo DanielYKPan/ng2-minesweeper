@@ -1,7 +1,13 @@
 <div class="tile"
-     [class.unrevealed]="!tile.Revealed && !tile.Covered"
+     [class.unrevealed]="!tile.Revealed || tile.Covered"
+     (contextmenu)="rightClickTile($event)"
      (click)="clickTile()">
     <div class="tile-content-wrapper">
+        <div class="tile-content" *ngIf="!tile.Revealed && tile.Covered">
+            <div>
+                <img src="/assets/img/icons/flag.ico">
+            </div>
+        </div>
         <div *ngIf="tile.Revealed"
              class="tile-content"
              [ngSwitch]="tile.Content"

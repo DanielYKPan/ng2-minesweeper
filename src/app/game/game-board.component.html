@@ -8,6 +8,8 @@
     </div>
     <div class="grid">
         <app-game-tile *ngFor="let tile of tiles$ | async; let i = index"
-                       [tile]="tile" (onClickTile)="revealTile($event)"></app-game-tile>
+                       [tile]="tile"
+                       (onRightClickTile)="clickTile($event, true)"
+                       (onClickTile)="clickTile($event)"></app-game-tile>
     </div>
 </div>
