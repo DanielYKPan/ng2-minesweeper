@@ -1,0 +1,16 @@
+.game-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.game-control {
+  width: 25%;
+  height: 1rem;
+  background: red;
+}
+
+.game-panel {
+  width: 75%;
+  height: 1rem;
+  background: blue;
+}
