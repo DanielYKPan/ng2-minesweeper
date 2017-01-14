@@ -26,6 +26,7 @@ import { GameLevelService } from "./game/game-level.service";
 import { GameComponent } from "./game/game.component";
 import { GameService } from "./game/game.service";
 import { GameBoardComponent } from "./game/game-board.component";
+import { GameTileComponent } from "./game/game-tile.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -47,6 +48,7 @@ type StoreType = {
         AppComponent,
         GameComponent,
         GameBoardComponent,
+        GameTileComponent,
     ],
     imports: [ // import Angular's modules
         BrowserModule,

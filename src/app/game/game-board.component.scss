@@ -1,6 +1,6 @@
 @import '../../styles/utils/variables';
 
-$tile-width: 2rem;
+$tile-width: 2.5rem;
 
 .board {
   margin: 1rem;
@@ -30,4 +30,10 @@ $tile-width: 2rem;
       cursor: pointer;
     }
   }
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
 }

@@ -1,0 +1,71 @@
+@import '../../styles/utils/variables';
+@import '../../styles/utils/functions';
+@import '../../styles/utils/mixins';
+
+$tile-width: 2.5rem;
+
+$colors: #ff00af, // 1
+#47f01c, // 2
+#990303, // 3
+#971eff, // 4
+#ffa333, // 5
+#22672d, // 6
+#622f43, // 7
+#23010b; // 8
+
+.tile {
+  position: relative;
+  width: $tile-width;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  cursor: crosshair;
+
+  &:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
+
+  &.unrevealed {
+    background-color: #FB6648;
+
+    &:hover {
+      background-color: #9e472c;
+    }
+  }
+}
+
+.tile-content-wrapper {
+  @include type-setting(1);
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  font-weight: 600;
+
+  .tile-content {
+    width: 100%;
+    height: 100%;
+
+    & > div {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  img {
+    object-fit: fill;
+    object-position: center;
+    width: 100%;
+    height: auto;
+  }
+
+  @for $x from 1 through 8 {
+    .tile-content-#{$x} {
+      color: nth($colors, $x);
+    }
+  }
+}
