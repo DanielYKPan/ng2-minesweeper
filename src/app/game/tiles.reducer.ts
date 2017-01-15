@@ -4,7 +4,7 @@
 
 import { ActionReducer } from "@ngrx/store";
 import { Tile } from "./tile";
-import { STORE_TILES, REVEAL_TILE, COVER_TILE, UNCOVER_TILE } from "./actions.const";
+import { STORE_TILES, REVEAL_TILE, COVER_TILE, UNCOVER_TILE, HIT_MINE, HIT_BLANK_TILE } from "./actions.const";
 import { IGameStatus } from "./game.service";
 import "rxjs/add/operator/let";
 import "rxjs/add/operator/map";
@@ -18,6 +18,8 @@ export const tiles: ActionReducer<Tile[]> = ( state: Tile[] = [], action: any ) 
         case REVEAL_TILE:
         case COVER_TILE:
         case UNCOVER_TILE:
+        case HIT_MINE:
+        case HIT_BLANK_TILE:
             return state.map(( tile, index ) => details(tile, action));
 
         default:
@@ -66,6 +68,7 @@ function details( state: Tile, action: any ): any {
             } else {
                 return state;
             }
+
         case  COVER_TILE:
             if (state.Id === action.payload && !state.Covered && !state.Revealed) {
                 return Object.assign(new Tile(), state, {covered: true});
@@ -77,6 +80,22 @@ function details( state: Tile, action: any ): any {
                 return Object.assign(new Tile(), state, {covered: false});
             }
             return state;
+
+        case HIT_MINE:
+            if (state.Id === action.payload && state.Content === "mine")
+                return Object.assign(new Tile(), state, {revealed: true, content: 'mine-wrong'});
+            if (state.Id != action.payload && state.Content === 'mine' && !state.Covered)
+                return Object.assign(new Tile(), state, {revealed: true});
+            if (state.Id != action.payload && state.Content != "mine" && state.Covered)
+                return Object.assign(new Tile(), state, {revealed: true, content: 'flag-mine-wrong'});
+            return state;
+
+        case HIT_BLANK_TILE:
+            if (state.Id === action.payload && !state.Revealed) {
+                return Object.assign(new Tile(), state, {revealed: true});
+            } else {
+                return state;
+            }
 
         default:
             return state;

@@ -4,7 +4,7 @@
 
 import { Injectable } from '@angular/core';
 import { Store } from "@ngrx/store";
-import { STORE_TILES, REVEAL_TILE, UNCOVER_TILE, COVER_TILE } from "./actions.const";
+import { STORE_TILES, REVEAL_TILE, UNCOVER_TILE, COVER_TILE, HIT_MINE, HIT_BLANK_TILE } from "./actions.const";
 import { Tile } from "./tile";
 import { GameLevelService } from "./game-level.service";
 
@@ -52,18 +52,38 @@ export class GameService {
     }
 
     public clickTile( tile: Tile ): void {
-        this.store.dispatch({type: REVEAL_TILE, payload: tile.Id});
-        return;
+        // If the game is over, do nothing
+        // If the clicked tile is covered, do nothing
+        // If the clicked tile is revealed, do nothing
+        if (this.status.gameOver || tile.Covered || tile.Revealed) return;
+
+        // Hit a blank tile
+        if (tile.Content === null) {
+            this.store.dispatch({type: HIT_BLANK_TILE, payload: tile.Id});
+            return;
+        }
+
+        // Hit a number tile
+        if (tile.Content && tile.Content != 'mine'){
+            this.store.dispatch({type: REVEAL_TILE, payload: tile.Id});
+            return;
+        }
+
+        // Hit a mine tile
+        if (tile.Content && tile.Content === 'mine') {
+            this.store.dispatch({type: HIT_MINE, payload: tile.Id});
+            return;
+        }
     }
 
     public coverTile( tile: Tile ): void {
-        if (tile.Revealed) return;
+        if (tile.Revealed || this.status.gameOver) return;
 
-        if (tile.Covered) {
-            this.store.dispatch({type: UNCOVER_TILE, payload: tile.Id});
+        if (!tile.Covered && this.status.flags > 0) {
+            this.store.dispatch({type: COVER_TILE, payload: tile.Id});
             return;
         } else {
-            this.store.dispatch({type: COVER_TILE, payload: tile.Id});
+            this.store.dispatch({type: UNCOVER_TILE, payload: tile.Id});
             return;
         }
     }
