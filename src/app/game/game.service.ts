@@ -19,14 +19,32 @@ const traversalPaths = [
     {x: 1, y: 1}
 ];
 
+export interface IGameStatus {
+    gameStart?: boolean;
+    gameOver: boolean;
+    gameWon: boolean;
+    flags: number;
+}
+
 @Injectable()
 export class GameService {
+
+    private status: IGameStatus;
+
+    get Status(): IGameStatus {
+        return this.status;
+    }
+
+    set Status( gameStatus: IGameStatus ) {
+        this.status = gameStatus;
+    }
 
     constructor( private gameLevel: GameLevelService,
                  private store: Store<any> ) {
     }
 
     public newGame(): void {
+        this.resetGameStatus();
         let tiles = this.buildTileGrid();
         tiles = this.shuffle(tiles);
         tiles = this.setTilesContent(tiles);
@@ -48,6 +66,12 @@ export class GameService {
             this.store.dispatch({type: COVER_TILE, payload: tile.Id});
             return;
         }
+    }
+
+    public changeGameStatus( status: IGameStatus ) {
+        this.status.gameWon = status.gameWon;
+        this.status.gameOver = status.gameOver;
+        this.status.flags = status.flags;
     }
 
     private buildTileGrid(): Tile[] {
@@ -106,6 +130,15 @@ export class GameService {
             }
         });
         return tiles;
+    }
+
+    private resetGameStatus() {
+        this.status = {
+            gameStart: false,
+            gameOver: false,
+            gameWon: false,
+            flags: this.gameLevel.GameLevel.mines
+        }
     }
 
     private static getNeighbourTiles( tile: Tile, tiles: Tile[], width: number, height: number, cb: ( t: Tile ) => any ) {
