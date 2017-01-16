@@ -1,14 +1,15 @@
 {
-  "name": "angular2-webpack-starter",
-  "version": "5.4.1",
-  "description": "An Angular 2 Webpack Starter kit featuring Angular 2 (Router, Http, Forms, Services, Tests, E2E, Coverage), Karma, Protractor, Jasmine, Istanbul, TypeScript, and Webpack by AngularClass",
+  "name": "angular2-minesweeper",
+  "version": "1.0.0",
+  "description": "A traditional minesweeper game built with AngularJS2",
   "keywords": [
     "angular2",
     "webpack",
-    "typescript"
+    "typescript",
+    "minesweeper"
   ],
-  "author": "Patrick Stapleton <patrick@angularclass.com>",
-  "homepage": "https://github.com/angularclass/angular2-webpack-starter",
+  "author": "Daniel Pan <myron.yk.pan@gmail.com>",
+  "homepage": "https://github.com/DanielYKPan/ng2-minesweeper",
   "license": "MIT",
   "scripts": {
     "build:aot:prod": "npm run clean:dist && npm run clean:aot && webpack --config config/webpack.prod.js  --progress --profile --bail",
@@ -155,10 +156,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/angularclass/angular2-webpack-starter.git"
+    "url": "https://github.com/DanielYKPan/ng2-minesweeper.git"
   },
   "bugs": {
-    "url": "https://github.com/angularclass/angular2-webpack-starter/issues"
+    "url": "https://github.com/DanielYKPan/ng2-minesweeper/issues"
   },
   "engines": {
     "node": ">= 4.2.1",
