@@ -17,8 +17,8 @@ export class GameTimerComponent implements OnInit, OnDestroy, OnChanges {
     @Input() start: boolean;
     @Input() over: boolean;
 
+    seconds: number;
     private intervalId: number;
-    private seconds: number;
 
     constructor() {
     }

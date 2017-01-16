@@ -19,11 +19,11 @@ import "rxjs/add/operator/distinctUntilChanged";
 })
 export class GameComponent implements OnInit, OnDestroy {
 
-    private status: IGameStatus;
-    private tiles$: Observable<Tile[]>;
+    status: IGameStatus;
+    tiles$: Observable<Tile[]>;
+    chosenLevel: ILevel;
+    levels: ILevel[];
     private gameStatusSub: Subscription;
-    private chosenLevel: ILevel;
-    private levels: ILevel[];
 
     constructor( private gameLevel: GameLevelService,
                  private gameService: GameService,
