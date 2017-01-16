@@ -8,7 +8,9 @@
             <img *ngIf="status.gameOver && !status.gameWon" src="/assets/img/icons/smiley-sad.ico" (click)="clickSmiley()">
             <img *ngIf="!status.gameOver" src="/assets/img/icons/smiley-smile.ico" (click)="clickSmiley()">
         </div>
-        <div class="header-right"></div>
+        <div class="header-right">
+            <app-game-timer [start]="status.gameStart" [over]="status.gameOver"></app-game-timer>
+        </div>
     </div>
     <div class="grid">
         <app-game-tile *ngFor="let tile of tiles; let i = index"

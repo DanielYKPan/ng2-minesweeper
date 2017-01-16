@@ -48,6 +48,7 @@ export class GameComponent implements OnInit, OnDestroy {
     }
 
     clickTile( tile: Tile, isRightClick: boolean = false ): void {
+        if(!this.status.gameStart) this.gameService.startGame();
         isRightClick ? this.gameService.coverTile(tile) : this.gameService.clickTile(tile);
     }
 

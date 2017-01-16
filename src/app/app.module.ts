@@ -27,6 +27,7 @@ import { GameComponent } from "./game/game.component";
 import { GameService } from "./game/game.service";
 import { GameBoardComponent } from "./game/game-board.component";
 import { GameTileComponent } from "./game/game-tile.component";
+import { GameTimerComponent } from "./game/game-timer.component";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -49,6 +50,7 @@ type StoreType = {
         GameComponent,
         GameBoardComponent,
         GameTileComponent,
+        GameTimerComponent,
     ],
     imports: [ // import Angular's modules
         BrowserModule,

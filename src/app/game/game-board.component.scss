@@ -6,6 +6,7 @@ $tile-width: 2.5rem;
 
 .board {
   margin: 1rem;
+  color: $white;
 
   &.beginner {
     width: $tile-width * 9;

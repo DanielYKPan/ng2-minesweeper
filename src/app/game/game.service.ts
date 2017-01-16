@@ -38,10 +38,6 @@ export class GameService {
         return this.status;
     }
 
-    set Status( gameStatus: IGameStatus ) {
-        this.status = gameStatus;
-    }
-
     constructor( private gameLevel: GameLevelService,
                  private store: Store<any> ) {
     }
@@ -98,6 +94,10 @@ export class GameService {
             return;
         }
     }
+
+    public startGame(): void {
+        this.status.gameStart = true;
+    };
 
     public changeGameStatus( status: IGameStatus ) {
         this.status.gameWon = status.gameWon;
