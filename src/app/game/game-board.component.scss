@@ -1,4 +1,6 @@
 @import '../../styles/utils/variables';
+@import '../../styles/utils/functions';
+@import '../../styles/utils/mixins';
 
 $tile-width: 2.5rem;
 
@@ -11,6 +13,8 @@ $tile-width: 2.5rem;
 }
 
 .header {
+  @include type-setting(3);
+
   display: flex;
   padding: $base-line-height 0;
   background-color: #FB6648;

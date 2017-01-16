@@ -3,6 +3,10 @@
 
     </div>
     <div class="game-panel">
-        <app-game-board></app-game-board>
+        <app-game-board
+                [status]="status"
+                [tiles]="tiles$ | async"
+                [level]="level"
+                (onSmileyClick)="newGame()"></app-game-board>
     </div>
 </div>

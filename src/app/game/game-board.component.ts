@@ -2,15 +2,13 @@
  * game-board.component
  */
 
-import { Component, OnInit, OnDestroy } from "@angular/core";
-import { GameLevelService, ILevel } from "./game-level.service";
-import { Observable, Subscription } from "rxjs";
-import { Store } from "@ngrx/store";
+import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
+import { ILevel } from "./game-level.service";
 import { Tile } from "./tile";
 import { GameService, IGameStatus } from "./game.service";
 import "rxjs/add/operator/let";
 import "rxjs/add/operator/map";
-import { gameStatus } from "./tiles.reducer";
+import { Observable } from "rxjs";
 
 @Component({
     selector: 'app-game-board',
@@ -18,32 +16,25 @@ import { gameStatus } from "./tiles.reducer";
     styleUrls: ['./game-board.component.scss']
 })
 
-export class GameBoardComponent implements OnInit, OnDestroy {
+export class GameBoardComponent implements OnInit {
 
-    private level: ILevel;
-    private gameStatus: IGameStatus;
-    private tiles$: Observable<any>;
-    private gameStatusSub: Subscription;
+    @Input() status: IGameStatus;
+    @Input() tiles: Tile[];
+    @Input() level: ILevel;
+    @Output() onSmileyClick = new EventEmitter<boolean>();
 
-    constructor( private gameLevel: GameLevelService,
-                 private gameService: GameService,
-                 private store: Store<any> ) {
+    constructor( private gameService: GameService ) {
     }
 
     ngOnInit(): void {
-        this.level = this.gameLevel.GameLevel;
-        this.gameStatus = this.gameService.Status;
-        this.tiles$ = this.store.select('tiles');
-        this.gameStatusSub = this.tiles$.let(gameStatus()).subscribe(
-            ( data: IGameStatus ) => this.gameService.changeGameStatus(data)
-        );
     }
 
-    ngOnDestroy(): void {
-        this.gameStatusSub.unsubscribe();
-    }
 
     clickTile( tile: Tile, isRightClick: boolean = false ): void {
         isRightClick ? this.gameService.coverTile(tile) : this.gameService.clickTile(tile);
+    }
+
+    clickSmiley() {
+        this.onSmileyClick.emit(true);
     }
 }
