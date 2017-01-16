@@ -20,15 +20,7 @@ import { AppComponent } from './app.component';
 import { AppState, InternalStateType } from './app.service';
 
 import '../styles/main.scss';
-import { StoreModule } from "@ngrx/store";
-import { tiles } from "./game/tiles.reducer";
-import { GameLevelService } from "./game/game-level.service";
-import { GameComponent } from "./game/game.component";
-import { GameService } from "./game/game.service";
-import { GameBoardComponent } from "./game/game-board.component";
-import { GameTileComponent } from "./game/game-tile.component";
-import { GameTimerComponent } from "./game/game-timer.component";
-import { GameControlComponent } from "./game/game-control.component";
+import { GameModule } from "./game";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -48,25 +40,16 @@ type StoreType = {
     bootstrap: [AppComponent],
     declarations: [
         AppComponent,
-        GameComponent,
-        GameBoardComponent,
-        GameTileComponent,
-        GameTimerComponent,
-        GameControlComponent,
     ],
     imports: [ // import Angular's modules
         BrowserModule,
         FormsModule,
         HttpModule,
-        StoreModule.provideStore({
-            tiles
-        }),
+        GameModule,
     ],
     providers: [ // expose our Services and Providers into Angular's dependency injection
         ENV_PROVIDERS,
         APP_PROVIDERS,
-        GameService,
-        GameLevelService
     ]
 })
 export class AppModule {
