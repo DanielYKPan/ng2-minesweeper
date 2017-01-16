@@ -1,9 +1,9 @@
 {
   "main": {
-    "js": "main.f4ff7a694c46bd318e64.bundle.js",
-    "css": "main.e701d9a0b0daf6e6d9a2a5eee198ef12.css"
+    "js": "ng2-minesweeper/distmain.15899d77fef53f47a1b8.bundle.js",
+    "css": "ng2-minesweeper/distmain.e701d9a0b0daf6e6d9a2a5eee198ef12.css"
   },
   "polyfills": {
-    "js": "polyfills.7392cade6b1036088196.bundle.js"
+    "js": "ng2-minesweeper/distpolyfills.7392cade6b1036088196.bundle.js"
   }
 }
