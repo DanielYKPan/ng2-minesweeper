@@ -1,12 +1,15 @@
 <div class="game-wrapper">
     <div class="game-control">
-
+        <app-game-control
+                [levels]="levels"
+                [chosenLevel]="chosenLevel"
+                (onChangeLevel)="changeGameLevel($event)"></app-game-control>
     </div>
     <div class="game-panel">
         <app-game-board
                 [status]="status"
                 [tiles]="tiles$ | async"
-                [level]="level"
+                [level]="chosenLevel"
                 (onRightClickTile)="clickTile($event, true)"
                 (onClickTile)="clickTile($event)"
                 (onSmileyClick)="newGame()"></app-game-board>

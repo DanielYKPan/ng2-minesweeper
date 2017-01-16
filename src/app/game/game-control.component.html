@@ -1,0 +1,14 @@
+<div class="control-panel">
+    <h3 class="game-name">Minesweeper</h3>
+    <label for="level" class="hidden">Game Level</label>
+    <select id="level" class="game-level-select"
+            [ngModel]="chosenLevel"
+            (ngModelChange)="changeLevel($event)">
+        <option *ngFor="let level of levels" [ngValue]="level">{{level.name}}</option>
+    </select>
+    <div class="level-inform">
+        <p>Level: {{chosenLevel.name}}</p>
+        <p>Game Panel Size: {{chosenLevel.width}} * {{chosenLevel.height}}</p>
+        <p>Total Mines: {{chosenLevel.mines}}</p>
+    </div>
+</div>

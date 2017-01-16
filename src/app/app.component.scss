@@ -1,13 +1,7 @@
 @import '../styles/utils/variables';
-@import '../styles/utils/functions';
-@import '../styles/utils/mixins';
 
 .main {
   position: relative;
   background-color: $mid-grey;
   height: 100%;
-}
-
-h1 {
-  @include type-setting(2);
 }

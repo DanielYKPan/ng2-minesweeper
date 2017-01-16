@@ -8,7 +8,7 @@ import { Store } from "@ngrx/store";
 import { Tile } from "./tile";
 import { Observable, Subscription } from "rxjs";
 import { gameStatus } from "./tiles.reducer";
-import { GameLevelService, ILevel } from "./game-level.service";
+import { GameLevelService, ILevel, LEVELS } from "./game-level.service";
 import "rxjs/add/operator/let";
 import "rxjs/add/operator/distinctUntilChanged";
 
@@ -22,7 +22,8 @@ export class GameComponent implements OnInit, OnDestroy {
     private status: IGameStatus;
     private tiles$: Observable<Tile[]>;
     private gameStatusSub: Subscription;
-    private level: ILevel;
+    private chosenLevel: ILevel;
+    private levels: ILevel[];
 
     constructor( private gameLevel: GameLevelService,
                  private gameService: GameService,
@@ -31,6 +32,7 @@ export class GameComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.newGame();
+        this.levels = LEVELS;
         this.tiles$ = this.store.select('tiles');
         this.gameStatusSub = this.tiles$
             .let(gameStatus())
@@ -48,13 +50,19 @@ export class GameComponent implements OnInit, OnDestroy {
     }
 
     clickTile( tile: Tile, isRightClick: boolean = false ): void {
-        if(!this.status.gameStart) this.gameService.startGame();
+        if (!this.status.gameStart)
+            this.gameService.startGame();
         isRightClick ? this.gameService.coverTile(tile) : this.gameService.clickTile(tile);
     }
 
-    newGame() {
+    newGame(): void {
         this.gameService.newGame();
-        this.level = this.gameLevel.GameLevel;
+        this.chosenLevel = this.gameLevel.GameLevel;
         this.status = this.gameService.Status;
+    }
+
+    changeGameLevel( level: ILevel ): void {
+        this.gameLevel.GameLevel = level;
+        this.newGame();
     }
 }

@@ -2,7 +2,7 @@
 @import '../../styles/utils/functions';
 @import '../../styles/utils/mixins';
 
-$tile-width: 2.5rem;
+$tile-width: 2rem;
 
 .board {
   margin: 1rem;
@@ -10,6 +10,14 @@ $tile-width: 2.5rem;
 
   &.beginner {
     width: $tile-width * 9;
+  }
+
+  &.intermediate {
+    max-width: $tile-width * 16;
+  }
+
+  &.expert {
+    max-width: $tile-width * 30;
   }
 }
 
