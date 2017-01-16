@@ -4,9 +4,9 @@
             {{status.flags}}
         </div>
         <div class="smiley">
-            <img *ngIf="status.gameOver && status.gameWon" src="/ng2-minesweeper/dist/assets/img/icons/smiley-cool.ico" (click)="clickSmiley()">
-            <img *ngIf="status.gameOver && !status.gameWon" src="/ng2-minesweeper/dist/assets/img/icons/smiley-sad.ico" (click)="clickSmiley()">
-            <img *ngIf="!status.gameOver" src="/ng2-minesweeper/dist/assets/img/icons/smiley-smile.ico" (click)="clickSmiley()">
+            <img *ngIf="status.gameOver && status.gameWon" src="/ng2-minesweeper/dist/assets/img/smiley-cool.ico" (click)="clickSmiley()">
+            <img *ngIf="status.gameOver && !status.gameWon" src="/ng2-minesweeper/dist/assets/img/smiley-sad.ico" (click)="clickSmiley()">
+            <img *ngIf="!status.gameOver" src="/ng2-minesweeper/dist/assets/img/smiley-smile.ico" (click)="clickSmiley()">
         </div>
         <div class="header-right">
             <app-game-timer [start]="status.gameStart" [over]="status.gameOver"></app-game-timer>

@@ -19,9 +19,9 @@
                         'tile-content-7': tile.Content==7,
                         'tile-content-8': tile.Content==8
                      }">
-            <div *ngSwitchCase="'mine'"><img src="/ng2-minesweeper/dist/assets/img/icons/mine.ico"></div>
-            <div *ngSwitchCase="'mine-wrong'"><img src="/ng2-minesweeper/dist/assets/img/icons/mine-wrong.ico"></div>
-            <div *ngSwitchCase="'flag-mine-wrong'"><img src="/ng2-minesweeper/dist/assets/img/icons/flag-mine-wrong.ico"></div>
+            <div *ngSwitchCase="'mine'"><img src="/ng2-minesweeper/dist/assets/img/mine.ico"></div>
+            <div *ngSwitchCase="'mine-wrong'"><img src="/ng2-minesweeper/dist/assets/img/mine-wrong.ico"></div>
+            <div *ngSwitchCase="'flag-mine-wrong'"><img src="/ng2-minesweeper/dist/assets/img/flag-mine-wrong.ico"></div>
             <div *ngSwitchDefault>{{tile.Content}}</div>
         </div>
     </div>
