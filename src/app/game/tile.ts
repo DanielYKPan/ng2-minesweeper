@@ -19,7 +19,8 @@ export class Tile {
     get Content(): string {
         return this.content
     }
-    set Content(value: string) {
+
+    set Content( value: string ) {
         this.content = value;
     }
 
@@ -29,7 +30,8 @@ export class Tile {
     get Covered(): boolean {
         return this.covered
     }
-    set Covered(value: boolean) {
+
+    set Covered( value: boolean ) {
         this.covered = value;
     }
 
@@ -39,7 +41,8 @@ export class Tile {
     get Revealed(): boolean {
         return this.revealed
     }
-    set Revealed(value: boolean) {
+
+    set Revealed( value: boolean ) {
         this.revealed = value;
     }
 
@@ -49,7 +52,8 @@ export class Tile {
     get Coordination(): {x: number, y: number} {
         return this.coordination
     }
-    set Coordination(value: {x: number, y: number}) {
+
+    set Coordination( value: {x: number, y: number} ) {
         this.coordination = value;
     }
 

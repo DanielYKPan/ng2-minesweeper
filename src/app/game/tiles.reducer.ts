@@ -5,12 +5,35 @@
 import { ActionReducer } from "@ngrx/store";
 import { Tile } from "./tile";
 import { STORE_TILES, REVEAL_TILE, COVER_TILE, UNCOVER_TILE, HIT_MINE, HIT_BLANK_TILE } from "./actions.const";
-import { IGameStatus } from "./game.service";
+import { IGameStatus, GameService } from "./game.service";
 import "rxjs/add/operator/let";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/distinctUntilChanged";
 
 export const tiles: ActionReducer<Tile[]> = ( state: Tile[] = [], action: any ) => {
+
+    let hitBlankTile = ( hitTile: Tile, width: number, height: number ) => {
+        if (!hitTile.Revealed && !hitTile.Covered) {
+
+            // reveal the hit tile
+            let index = GameService.coordinationToIndex(hitTile.Coordination, width);
+            let newTile = Object.assign(new Tile(), hitTile, {Revealed: true});
+            state = state.slice(0, index)
+                .concat(newTile)
+                .concat(state.slice(index + 1));
+
+            // if the hitTile is blank tile,
+            // we will reveal all its neighbour non-mine tiles
+            if (hitTile.Content === null) {
+                GameService.getNeighbourTiles(hitTile, state, width, height, ( t ) => {
+                    if (t.Content !== 'mine') {
+                        hitBlankTile(t, width, height);
+                    }
+                });
+            }
+        }
+    };
+
     switch (action.type) {
         case STORE_TILES:
             return Object.assign([], action.payload.tiles);
@@ -19,9 +42,11 @@ export const tiles: ActionReducer<Tile[]> = ( state: Tile[] = [], action: any ) 
         case COVER_TILE:
         case UNCOVER_TILE:
         case HIT_MINE:
-        case HIT_BLANK_TILE:
             return state.map(( tile, index ) => details(tile, action));
 
+        case HIT_BLANK_TILE:
+            hitBlankTile(action.payload.tile, action.payload.width, action.payload.height);
+            return state;
         default:
             return state;
     }
@@ -89,13 +114,6 @@ function details( state: Tile, action: any ): any {
             if (state.Id != action.payload && state.Content != "mine" && state.Covered)
                 return Object.assign(new Tile(), state, {revealed: true, content: 'flag-mine-wrong'});
             return state;
-
-        case HIT_BLANK_TILE:
-            if (state.Id === action.payload && !state.Revealed) {
-                return Object.assign(new Tile(), state, {revealed: true});
-            } else {
-                return state;
-            }
 
         default:
             return state;

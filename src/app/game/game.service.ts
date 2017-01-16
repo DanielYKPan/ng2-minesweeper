@@ -8,7 +8,7 @@ import { STORE_TILES, REVEAL_TILE, UNCOVER_TILE, COVER_TILE, HIT_MINE, HIT_BLANK
 import { Tile } from "./tile";
 import { GameLevelService } from "./game-level.service";
 
-const traversalPaths = [
+const TraversalPaths = [
     {x: -1, y: -1},
     {x: 0, y: -1},
     {x: 1, y: -1},
@@ -59,12 +59,20 @@ export class GameService {
 
         // Hit a blank tile
         if (tile.Content === null) {
-            this.store.dispatch({type: HIT_BLANK_TILE, payload: tile.Id});
+            this.store.dispatch(
+                {
+                    type: HIT_BLANK_TILE,
+                    payload: {
+                        tile,
+                        width: this.gameLevel.GameLevel.width,
+                        height: this.gameLevel.GameLevel.height
+                    }
+                });
             return;
         }
 
         // Hit a number tile
-        if (tile.Content && tile.Content != 'mine'){
+        if (tile.Content && tile.Content != 'mine') {
             this.store.dispatch({type: REVEAL_TILE, payload: tile.Id});
             return;
         }
@@ -161,13 +169,13 @@ export class GameService {
         }
     }
 
-    private static getNeighbourTiles( tile: Tile, tiles: Tile[], width: number, height: number, cb: ( t: Tile ) => any ) {
-        for (let i = 0; i < traversalPaths.length; i++) {
-            let neighbour_x = tile.Coordination.x + traversalPaths[i].x,
-                neighbour_y = tile.Coordination.y + traversalPaths[i].y;
+    public static getNeighbourTiles( tile: Tile, tiles: Tile[], width: number, height: number, cb: ( t: Tile ) => any ) {
+        for (let tp of TraversalPaths) {
+            let neighbour_x = tile.Coordination.x + tp.x,
+                neighbour_y = tile.Coordination.y + tp.y;
 
             if (neighbour_x >= 0 && neighbour_x < width && neighbour_y >= 0 && neighbour_y < height) {
-                let position = neighbour_x + neighbour_y * width;
+                let position = GameService.coordinationToIndex({x: neighbour_x, y: neighbour_y}, width);
                 let tile = tiles[position];
 
                 cb(tile);
@@ -175,14 +183,14 @@ export class GameService {
         }
     }
 
-    private static indexToCoordination( index: number, width: number ): {x: number; y: number} {
+    public static indexToCoordination( index: number, width: number ): {x: number; y: number} {
         let x = index % width,
             y = (index - x) / width;
 
         return {x: x, y: y};
     }
 
-    private static coordinationToIndex( coordination: {x: number, y: number}, width: number ): number {
+    public static coordinationToIndex( coordination: {x: number, y: number}, width: number ): number {
         return coordination.x + coordination.y * width;
     }
 }
