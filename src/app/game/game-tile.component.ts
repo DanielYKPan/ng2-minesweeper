@@ -2,7 +2,7 @@
  * game-tile.component
  */
 
-import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { Tile } from "./tile";
 
 @Component({
@@ -14,23 +14,10 @@ import { Tile } from "./tile";
 export class GameTileComponent implements OnInit {
 
     @Input() tile: Tile;
-    @Output() onClickTile = new EventEmitter<Tile>();
-    @Output() onRightClickTile = new EventEmitter<Tile>();
 
     constructor() {
     }
 
     ngOnInit(): void {
-    }
-
-    clickTile(): void {
-        if (this.tile)
-            this.onClickTile.emit(this.tile);
-    }
-
-    rightClickTile( event: MouseEvent ): void {
-        event.preventDefault();
-        if (this.tile)
-            this.onRightClickTile.emit(this.tile);
     }
 }

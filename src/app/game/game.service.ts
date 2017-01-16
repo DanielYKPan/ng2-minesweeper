@@ -4,7 +4,10 @@
 
 import { Injectable } from '@angular/core';
 import { Store } from "@ngrx/store";
-import { STORE_TILES, REVEAL_TILE, UNCOVER_TILE, COVER_TILE, HIT_MINE, HIT_BLANK_TILE } from "./actions.const";
+import {
+    STORE_TILES, REVEAL_TILE, UNCOVER_TILE, COVER_TILE, HIT_MINE, HIT_BLANK_TILE,
+    REVEAL_ALL
+} from "./actions.const";
 import { Tile } from "./tile";
 import { GameLevelService } from "./game-level.service";
 
@@ -100,6 +103,14 @@ export class GameService {
         this.status.gameWon = status.gameWon;
         this.status.gameOver = status.gameOver;
         this.status.flags = status.flags;
+
+        if (this.status.gameOver && this.status.gameWon) {
+            this.revealAll();
+        }
+    }
+
+    private revealAll(): void {
+        this.store.dispatch({type: REVEAL_ALL});
     }
 
     private buildTileGrid(): Tile[] {

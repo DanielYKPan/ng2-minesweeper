@@ -1,7 +1,5 @@
 <div class="tile"
-     [class.unrevealed]="!tile.Revealed || tile.Covered"
-     (contextmenu)="rightClickTile($event)"
-     (click)="clickTile()">
+     [class.unrevealed]="!tile.Revealed || tile.Covered">
     <div class="tile-content-wrapper">
         <div class="tile-content" *ngIf="!tile.Revealed && tile.Covered">
             <div>

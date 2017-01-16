@@ -8,3 +8,4 @@ export const COVER_TILE = 'COVER_TILE';
 export const UNCOVER_TILE = 'UNCOVER_TILE';
 export const HIT_MINE = 'HIT_MINE';
 export const HIT_BLANK_TILE = 'HIT_BLANK_TILE';
+export const REVEAL_ALL = 'REVEAL_ALL';

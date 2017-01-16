@@ -7,6 +7,8 @@
                 [status]="status"
                 [tiles]="tiles$ | async"
                 [level]="level"
+                (onRightClickTile)="clickTile($event, true)"
+                (onClickTile)="clickTile($event)"
                 (onSmileyClick)="newGame()"></app-game-board>
     </div>
 </div>

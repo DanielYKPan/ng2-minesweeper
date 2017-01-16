@@ -4,7 +4,10 @@
 
 import { ActionReducer } from "@ngrx/store";
 import { Tile } from "./tile";
-import { STORE_TILES, REVEAL_TILE, COVER_TILE, UNCOVER_TILE, HIT_MINE, HIT_BLANK_TILE } from "./actions.const";
+import {
+    STORE_TILES, REVEAL_TILE, COVER_TILE, UNCOVER_TILE, HIT_MINE, HIT_BLANK_TILE,
+    REVEAL_ALL
+} from "./actions.const";
 import { IGameStatus, GameService } from "./game.service";
 import "rxjs/add/operator/let";
 import "rxjs/add/operator/map";
@@ -39,6 +42,7 @@ export const tiles: ActionReducer<Tile[]> = ( state: Tile[] = [], action: any ) 
             return Object.assign([], action.payload.tiles);
 
         case REVEAL_TILE:
+        case REVEAL_ALL:
         case COVER_TILE:
         case UNCOVER_TILE:
         case HIT_MINE:
@@ -93,6 +97,12 @@ function details( state: Tile, action: any ): any {
             } else {
                 return state;
             }
+
+        case REVEAL_ALL:
+            if (state.Revealed || state.Covered)
+                return state;
+            else
+                return Object.assign(new Tile(), state, {revealed: true});
 
         case  COVER_TILE:
             if (state.Id === action.payload && !state.Covered && !state.Revealed) {

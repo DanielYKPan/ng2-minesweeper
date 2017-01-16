@@ -13,7 +13,7 @@
     <div class="grid">
         <app-game-tile *ngFor="let tile of tiles; let i = index"
                        [tile]="tile"
-                       (onRightClickTile)="clickTile($event, true)"
-                       (onClickTile)="clickTile($event)"></app-game-tile>
+                       (contextmenu)="rightClickTile($event, tile)"
+                       (click)="clickTile(tile)"></app-game-tile>
     </div>
 </div>

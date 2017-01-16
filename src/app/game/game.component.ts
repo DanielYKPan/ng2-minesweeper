@@ -9,6 +9,8 @@ import { Tile } from "./tile";
 import { Observable, Subscription } from "rxjs";
 import { gameStatus } from "./tiles.reducer";
 import { GameLevelService, ILevel } from "./game-level.service";
+import "rxjs/add/operator/let";
+import "rxjs/add/operator/distinctUntilChanged";
 
 @Component({
     selector: 'app-game',
@@ -30,13 +32,23 @@ export class GameComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.newGame();
         this.tiles$ = this.store.select('tiles');
-        this.gameStatusSub = this.tiles$.let(gameStatus()).subscribe(
-            ( data: IGameStatus ) => this.gameService.changeGameStatus(data)
-        );
+        this.gameStatusSub = this.tiles$
+            .let(gameStatus())
+            .distinctUntilChanged(
+                ( a: IGameStatus, b: IGameStatus ) => {
+                    return a.gameWon == b.gameWon && a.gameOver == b.gameOver && a.flags == b.flags;
+                }) // Use distinctUntilChanged to check if the gameStatus has changed
+            .subscribe(
+                ( data: IGameStatus ) => this.gameService.changeGameStatus(data)
+            );
     }
 
     ngOnDestroy(): void {
         this.gameStatusSub.unsubscribe();
+    }
+
+    clickTile( tile: Tile, isRightClick: boolean = false ): void {
+        isRightClick ? this.gameService.coverTile(tile) : this.gameService.clickTile(tile);
     }
 
     newGame() {

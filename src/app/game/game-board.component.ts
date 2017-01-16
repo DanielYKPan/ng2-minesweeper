@@ -5,10 +5,7 @@
 import { Component, OnInit, Output, EventEmitter, Input } from "@angular/core";
 import { ILevel } from "./game-level.service";
 import { Tile } from "./tile";
-import { GameService, IGameStatus } from "./game.service";
-import "rxjs/add/operator/let";
-import "rxjs/add/operator/map";
-import { Observable } from "rxjs";
+import { IGameStatus } from "./game.service";
 
 @Component({
     selector: 'app-game-board',
@@ -22,19 +19,25 @@ export class GameBoardComponent implements OnInit {
     @Input() tiles: Tile[];
     @Input() level: ILevel;
     @Output() onSmileyClick = new EventEmitter<boolean>();
+    @Output() onClickTile = new EventEmitter<Tile>();
+    @Output() onRightClickTile = new EventEmitter<Tile>();
 
-    constructor( private gameService: GameService ) {
+    constructor() {
     }
 
     ngOnInit(): void {
     }
 
-
-    clickTile( tile: Tile, isRightClick: boolean = false ): void {
-        isRightClick ? this.gameService.coverTile(tile) : this.gameService.clickTile(tile);
-    }
-
     clickSmiley() {
         this.onSmileyClick.emit(true);
+    }
+
+    clickTile( tile: Tile ): void {
+        this.onClickTile.emit(tile);
+    }
+
+    rightClickTile( event: MouseEvent, tile: Tile ): void {
+        event.preventDefault();
+        this.onRightClickTile.emit(tile);
     }
 }
