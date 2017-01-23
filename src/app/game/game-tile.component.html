@@ -3,7 +3,7 @@
     <div class="tile-content-wrapper">
         <div class="tile-content" *ngIf="!tile.Revealed && tile.Covered">
             <div>
-                <img src="/assets/img/icons/flag.ico">
+                <img src="/assets/img/flag.ico">
             </div>
         </div>
         <div *ngIf="tile.Revealed"
@@ -19,9 +19,9 @@
                         'tile-content-7': tile.Content==7,
                         'tile-content-8': tile.Content==8
                      }">
-            <div *ngSwitchCase="'mine'"><img src="/assets/img/icons/mine.ico"></div>
-            <div *ngSwitchCase="'mine-wrong'"><img src="/assets/img/icons/mine-wrong.ico"></div>
-            <div *ngSwitchCase="'flag-mine-wrong'"><img src="/assets/img/icons/flag-mine-wrong.ico"></div>
+            <div *ngSwitchCase="'mine'"><img src="/assets/img/mine.ico"></div>
+            <div *ngSwitchCase="'mine-wrong'"><img src="/assets/img/mine-wrong.ico"></div>
+            <div *ngSwitchCase="'flag-mine-wrong'"><img src="/assets/img/flag-mine-wrong.ico"></div>
             <div *ngSwitchDefault>{{tile.Content}}</div>
         </div>
     </div>
