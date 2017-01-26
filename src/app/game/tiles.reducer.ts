@@ -5,37 +5,15 @@
 import { ActionReducer } from "@ngrx/store";
 import { Tile } from "./tile";
 import {
-    STORE_TILES, REVEAL_TILE, COVER_TILE, UNCOVER_TILE, HIT_MINE, HIT_BLANK_TILE,
+    STORE_TILES, REVEAL_TILE, COVER_TILE, UNCOVER_TILE, HIT_MINE,
     REVEAL_ALL
 } from "./actions.const";
-import { IGameStatus, GameService } from "./game.service";
+import { IGameStatus } from "./game.service";
 import "rxjs/add/operator/let";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/distinctUntilChanged";
 
 export const tiles: ActionReducer<Tile[]> = ( state: Tile[] = [], action: any ) => {
-
-    let hitBlankTile = ( hitTile: Tile, width: number, height: number ) => {
-        if (!hitTile.Revealed && !hitTile.Covered) {
-
-            // reveal the hit tile
-            let index = GameService.coordinationToIndex(hitTile.Coordination, width);
-            let newTile = Object.assign(new Tile(), hitTile, {Revealed: true});
-            state = state.slice(0, index)
-                .concat(newTile)
-                .concat(state.slice(index + 1));
-
-            // if the hitTile is blank tile,
-            // we will reveal all its neighbour non-mine tiles
-            if (hitTile.Content === null) {
-                GameService.getNeighbourTiles(hitTile, state, width, height, ( t ) => {
-                    if (t.Content !== 'mine') {
-                        hitBlankTile(t, width, height);
-                    }
-                });
-            }
-        }
-    };
 
     switch (action.type) {
         case STORE_TILES:
@@ -48,9 +26,6 @@ export const tiles: ActionReducer<Tile[]> = ( state: Tile[] = [], action: any ) 
         case HIT_MINE:
             return state.map(( tile, index ) => details(tile, action));
 
-        case HIT_BLANK_TILE:
-            hitBlankTile(action.payload.tile, action.payload.width, action.payload.height);
-            return state;
         default:
             return state;
     }
