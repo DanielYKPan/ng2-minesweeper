@@ -18,9 +18,9 @@ export interface ILevel {
 }
 
 export const LEVELS: ILevel[] = [
-    {name: Level[Level.BEGINNER].toLowerCase(), width: 9, height: 9, mines: 10 },
+    {name: Level[Level.BEGINNER].toLowerCase(), width: 8, height: 8, mines: 10 },
     {name: Level[Level.INTERMEDIATE].toLowerCase(), width: 16, height: 16, mines: 40 },
-    {name: Level[Level.EXPERT].toLowerCase(), width: 30, height: 16, mines: 100 }
+    {name: Level[Level.EXPERT].toLowerCase(), width: 30, height: 16, mines: 99 }
 ];
 
 @Injectable()
