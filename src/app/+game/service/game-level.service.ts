@@ -26,7 +26,7 @@ export const LEVELS: ILevel[] = [
 @Injectable()
 export class GameLevelService {
 
-    private gameLevel: ILevel = LEVELS[Level.BEGINNER];
+    private gameLevel: ILevel = LEVELS[Level.EXPERT];
 
     get GameLevel() {
         return this.gameLevel
