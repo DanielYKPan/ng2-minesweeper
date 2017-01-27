@@ -34,7 +34,7 @@ body {
   @include type-setting(0);
 
   height: 100%;
-  font-family: 'Josefin Slab';
+  font-family: $base-font;
   background: $mid-grey;
   color: $text-color;
 }

@@ -1,5 +1,73 @@
+@import '../../styles/utils/variables';
+@import '../../styles/utils/functions';
+@import '../../styles/utils/mixins';
+
 .game-wrapper {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100vh;
   background-color: #e0b97e;
+}
+
+.game-menu {
+  display: flex;
+  justify-content: space-around;
+
+  .game-menu-item {
+    width: 48%;
+    max-width: 200px;
+    position: relative;
+  }
+
+  button {
+    @include type-setting(0);
+
+    position: absolute;
+    top: 100%;
+    height: $base-line-height * 3;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #603309;
+    background-color: #f7f4b7;
+    z-index: 106;
+    outline: 0;
+    cursor: pointer;
+    border: none;
+    border-radius: 0 0 1.5rem 1.5rem;
+    box-shadow: 0 5px 50px #603309;
+    transition: all 100ms linear;
+
+    &:hover {
+      background-color: darken(#f7f4b7, 10%);
+    }
+
+    &:active {
+      transform: translateY(-5px);
+      background-color: darken(#f7f4b7, 10%);
+      box-shadow: 0 0 10px #fff2ba;
+    }
+
+    img {
+      width: 2.5rem;
+      height: 2.5rem;
+      margin-right: 5px;
+    }
+
+    span {
+      @include type-setting(0);
+
+      @include respond-to('medium') {
+        @include type-setting(1);
+      }
+      margin: 0;
+    }
+  }
+}
+
+.game-main {
+  flex: 1;
+  width: 100%;
 }
