@@ -8,6 +8,7 @@ import { FormsModule } from "@angular/forms";
 import { GameComponent } from "./game.component";
 import { RouterModule } from "@angular/router";
 import { routes } from './game.routes';
+import { GameBoardComponent } from "./game-board/game-board.component";
 
 @NgModule({
     imports: [
@@ -16,7 +17,8 @@ import { routes } from './game.routes';
         RouterModule.forChild(routes),
     ],
     declarations: [
-        GameComponent
+        GameComponent,
+        GameBoardComponent,
     ],
     exports: [],
     providers: []
