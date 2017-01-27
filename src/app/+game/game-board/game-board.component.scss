@@ -120,3 +120,11 @@ $tile-width: 2rem;
     }
   }
 }
+
+.game-control {
+  display: none;
+
+  @include respond-to(large) {
+    display: flex;
+  }
+}

@@ -1,0 +1,18 @@
+<div class="about-wrapper">
+    <div class="logo">
+        <h1 class="logo-title">mine</h1>
+        <img class="logo-img" src="/assets/img/sweeper.png">
+        <h1 class="logo-title">sweeper</h1>
+    </div>
+    <div class="about-body">
+        <p>
+            Minesweeper is a single-player puzzle game. The objective of the game is to clear a rectangular board
+            containing hidden "mines" without detonating any of them, with help from clues about the number of
+            neighboring mines in each field.
+        </p>
+        <p><strong>Author:</strong> Daniel Pan</p>
+    </div>
+    <div class="social">
+        <app-game-about-social *ngFor="let btn of socialBtns" [btn]="btn"></app-game-about-social>
+    </div>
+</div>
