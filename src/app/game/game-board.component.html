@@ -1,5 +1,5 @@
 <div class="board {{level.name}}">
-    <div class="header">
+    <!--<div class="header">
         <div class="header-left">
             {{status.flags}}
         </div>
@@ -11,7 +11,7 @@
         <div class="header-right">
             <app-game-timer [start]="status.gameStart" [over]="status.gameOver"></app-game-timer>
         </div>
-    </div>
+    </div>-->
     <div class="grid">
         <app-game-tile *ngFor="let tile of tiles; let i = index"
                        [tile]="tile"

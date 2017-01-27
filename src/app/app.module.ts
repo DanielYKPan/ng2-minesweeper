@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import {
     NgModule,
     ApplicationRef
@@ -18,9 +17,11 @@ import { ENV_PROVIDERS } from './environment';
 // App is our top level component
 import { AppComponent } from './app.component';
 import { AppState, InternalStateType } from './app.service';
+import { AppRoutingModule } from "./app.routes";
 
+
+// Basic styles
 import '../styles/main.scss';
-import { GameModule } from "./game";
 
 // Application wide providers
 const APP_PROVIDERS = [
@@ -44,8 +45,7 @@ type StoreType = {
     imports: [ // import Angular's modules
         BrowserModule,
         FormsModule,
-        HttpModule,
-        GameModule,
+        AppRoutingModule,
     ],
     providers: [ // expose our Services and Providers into Angular's dependency injection
         ENV_PROVIDERS,
