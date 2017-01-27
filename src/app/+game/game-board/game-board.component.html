@@ -1,5 +1,12 @@
 <div class="game-wrapper">
-    <div class="game-board"></div>
+    <div class="game-board">
+        <div class="grid {{chosenLevel.name}}">
+            <app-game-tile *ngFor="let tile of tiles$ | async; let i = index"
+                           [tile]="tile"
+                           (onRightClickTile)="clickTile($event, true)"
+                           (onClickTile)="clickTile($event)"></app-game-tile>
+        </div>
+    </div>
     <div class="game-inform">
         <div class="inform-bum timer-bum">
             <img class="inform-bun-img" src="/assets/img/clock.png">

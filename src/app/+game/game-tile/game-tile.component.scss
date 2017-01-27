@@ -1,0 +1,67 @@
+@import '../../../styles/utils/variables';
+@import '../../../styles/utils/functions';
+@import '../../../styles/utils/mixins';
+
+$tile-width: 3rem;
+
+$colors: #ff00af, // 1
+#47f01c, // 2
+#990303, // 3
+#971eff, // 4
+#ffa333, // 5
+#22672d, // 6
+#622f43, // 7
+#23010b; // 8
+
+:host {
+  width: $tile-width;
+  height: $tile-width;
+  padding: 2px;
+  user-select: none;
+}
+
+.tile-cell {
+  width: 100%;
+  height: 100%;
+  border-radius: .2rem;
+
+  background-color: #fefefe;
+  box-shadow: inset 0px 0px .3px 2px rgba(0,0,0,1);
+
+  &.unknown {
+    background-color: #62b2fe;
+      border: 2px solid;
+      border-color: #68cdff #3d5482 #3d5482 #68cdff;
+      box-shadow: none;
+      &:hover {
+        border-color: #3d5482 #68cdff #68cdff #3d5482;
+      }
+  }
+
+  &.mine-wrong {
+    background-color: #ab0a11;
+  }
+
+  .tile-content {
+    @include type-setting(2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: $text-color;
+  }
+
+  @for $x from 1 through 8 {
+    .tile-content-#{$x} {
+      color: nth($colors, $x);
+    }
+  }
+
+  img {
+    object-fit: fill;
+    object-position: center;
+    width: 60%;
+    height: auto;
+  }
+}

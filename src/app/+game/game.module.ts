@@ -11,6 +11,7 @@ import { GameComponent } from "./game.component";
 import { routes } from './game.routes';
 import { GameBoardComponent } from "./game-board/game-board.component";
 import { GameService, GameLevelService, tiles } from "./service";
+import { GameTileComponent } from "./game-tile";
 
 @NgModule({
     imports: [
@@ -24,6 +25,7 @@ import { GameService, GameLevelService, tiles } from "./service";
     declarations: [
         GameComponent,
         GameBoardComponent,
+        GameTileComponent,
     ],
     exports: [],
     providers: [

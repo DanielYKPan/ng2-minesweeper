@@ -2,6 +2,8 @@
 @import '../../../styles/utils/functions';
 @import '../../../styles/utils/mixins';
 
+$tile-width: 3rem;
+
 .game-wrapper {
   display: flex;
   width: 100%;
@@ -9,7 +11,28 @@
 }
 
 .game-board {
+  display: flex;
   flex: 1;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+
+  &.beginner {
+    width: $tile-width * 8;
+  }
+
+  &.intermediate {
+    max-width: $tile-width * 16;
+  }
+
+  &.expert {
+    max-width: $tile-width * 30;
+  }
 }
 
 .game-inform {
