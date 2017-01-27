@@ -71,3 +71,16 @@
   flex: 1;
   width: 100%;
 }
+
+.game-logo {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  max-width: 200px;
+  width: 30%;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
