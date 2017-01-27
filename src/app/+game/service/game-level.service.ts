@@ -5,9 +5,9 @@
 import { Injectable } from '@angular/core';
 
 enum Level {
-    BEGINNER,
-    INTERMEDIATE,
-    EXPERT
+    JUNIOR,
+    SENIOR,
+    MASTER
 }
 
 export interface ILevel {
@@ -18,15 +18,15 @@ export interface ILevel {
 }
 
 export const LEVELS: ILevel[] = [
-    {name: Level[Level.BEGINNER].toLowerCase(), width: 8, height: 8, mines: 10 },
-    {name: Level[Level.INTERMEDIATE].toLowerCase(), width: 16, height: 16, mines: 40 },
-    {name: Level[Level.EXPERT].toLowerCase(), width: 30, height: 16, mines: 99 }
+    {name: Level[Level.JUNIOR].toLowerCase(), width: 8, height: 8, mines: 10 },
+    {name: Level[Level.SENIOR].toLowerCase(), width: 16, height: 16, mines: 40 },
+    {name: Level[Level.MASTER].toLowerCase(), width: 30, height: 16, mines: 99 }
 ];
 
 @Injectable()
 export class GameLevelService {
 
-    private gameLevel: ILevel = LEVELS[Level.EXPERT];
+    private gameLevel: ILevel = LEVELS[Level.MASTER];
 
     get GameLevel() {
         return this.gameLevel

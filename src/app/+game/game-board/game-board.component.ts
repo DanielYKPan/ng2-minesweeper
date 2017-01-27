@@ -5,7 +5,7 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Observable, Subscription } from "rxjs";
 import { Store } from "@ngrx/store";
-import { GameLevelService, GameService, Tile, ILevel, IGameStatus, gameStatus  } from "../service";
+import { GameLevelService, GameService, Tile, ILevel, IGameStatus, gameStatus, LEVELS } from "../service";
 
 @Component({
     selector: 'app-game-board',
@@ -18,17 +18,19 @@ export class GameBoardComponent implements OnInit, OnDestroy {
 
     tiles$: Observable<Tile[]>;
     chosenLevel: ILevel;
+    levels: ILevel[];
     status: IGameStatus;
 
     private gameStatusSub: Subscription;
 
     constructor( private gameLevel: GameLevelService,
                  private gameService: GameService,
-                 private store: Store<any>) {
+                 private store: Store<any> ) {
     }
 
     ngOnInit(): void {
         this.newGame();
+        this.levels = LEVELS;
         this.tiles$ = this.store.select('tiles');
         this.gameStatusSub = this.tiles$
             .let(gameStatus())
@@ -42,7 +44,7 @@ export class GameBoardComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        if(this.gameStatusSub)
+        if (this.gameStatusSub)
             this.gameStatusSub.unsubscribe()
     }
 
@@ -56,5 +58,10 @@ export class GameBoardComponent implements OnInit, OnDestroy {
         if (!this.status.gameStart)
             this.gameService.startGame();
         isRightClick ? this.gameService.coverTile(tile) : this.gameService.clickTile(tile);
+    }
+
+    changeGameLevel( level: ILevel ): void {
+        this.gameLevel.GameLevel = level;
+        this.newGame();
     }
 }

@@ -1,16 +1,11 @@
 <div class="game-wrapper">
     <div class="game-inform">
-        <div class="bum control-bum">
-            <img class="inform-bun-img" src="/assets/img/bomb_junior.png">
-            <h4>Junior</h4>
-        </div>
-        <div class="bum control-bum">
-            <img class="inform-bun-img" src="/assets/img/bomb_senior.png">
-            <h4>Senior</h4>
-        </div>
-        <div class="bum control-bum">
-            <img class="inform-bun-img" src="/assets/img/bomb_master.png">
-            <h4>Master</h4>
+        <div class="bum control-bum"
+             *ngFor="let level of levels"
+             [class.active]="chosenLevel.name == level.name"
+             (click)="changeGameLevel(level)">
+            <img src="/assets/img/bomb_{{level.name}}.png">
+            <h4>{{level.name}}</h4>
         </div>
     </div>
     <div class="game-board">
@@ -23,16 +18,16 @@
     </div>
     <div class="game-inform">
         <div class="bum inform-bum timer-bum">
-            <img class="inform-bun-img" src="/assets/img/clock.png">
-            <h2>099</h2>
+            <img src="/assets/img/clock.png">
+            <h2><app-game-timer [start]="status.gameStart" [over]="status.gameOver"></app-game-timer></h2>
         </div>
         <div class="bum inform-bum">
-            <img class="inform-bun-img" src="/assets/img/bomb_fear.png">
+            <img src="/assets/img/bomb_fear.png">
             <h3>99</h3>
         </div>
         <div class="bum inform-bum">
-            <img class="inform-bun-img" src="/assets/img/flag.png">
-            <h3>10</h3>
+            <img src="/assets/img/flag.png">
+            <h3>{{status.flags}}</h3>
         </div>
     </div>
 </div>

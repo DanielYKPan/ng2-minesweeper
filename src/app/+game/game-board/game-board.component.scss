@@ -22,15 +22,15 @@ $tile-width: 2rem;
   flex-wrap: wrap;
   width: 100%;
 
-  &.beginner {
+  &.junior {
     width: $tile-width * 8;
   }
 
-  &.intermediate {
+  &.senior {
     max-width: $tile-width * 16;
   }
 
-  &.expert {
+  &.master {
     max-width: $tile-width * 30;
   }
 }
@@ -99,8 +99,22 @@ $tile-width: 2rem;
   }
 
   .control-bum {
+    cursor: pointer;
+    transform: scale(1);
+    transition: transform 200ms ease;
+
+    &:hover {
+      color: #d60a12;
+      transform: scale(1.1);
+    }
+
+    &.active {
+      color: #ab0a11;
+      transform: scale(1.2);
+    }
+
     img {
-      width: 30%;
+      width: 25%;
       height: auto;
       margin-right: 5px;
     }

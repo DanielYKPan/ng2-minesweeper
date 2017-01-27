@@ -9,9 +9,10 @@ import { StoreModule } from "@ngrx/store";
 import { RouterModule } from "@angular/router";
 import { GameComponent } from "./game.component";
 import { routes } from './game.routes';
-import { GameBoardComponent } from "./game-board/game-board.component";
+import { GameBoardComponent } from "./game-board";
 import { GameService, GameLevelService, tiles } from "./service";
 import { GameTileComponent } from "./game-tile";
+import { GameTimerComponent } from "./game-timer";
 
 @NgModule({
     imports: [
@@ -26,6 +27,7 @@ import { GameTileComponent } from "./game-tile";
         GameComponent,
         GameBoardComponent,
         GameTileComponent,
+        GameTimerComponent,
     ],
     exports: [],
     providers: [
