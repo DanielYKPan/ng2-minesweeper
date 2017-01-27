@@ -14,7 +14,7 @@
   display: flex;
   align-content: space-around;
   margin: 0 auto;
-  max-width: 500px;
+  max-width: 700px;
   width: 95%;
   flex-direction: column;
   justify-content: center;
@@ -39,6 +39,11 @@
   }
 
   .logo-img {
+    display: none;
+
+    @include respond-to(small) {
+      display: block;
+    }
     width: 100px;
     height: auto;
   }
@@ -46,7 +51,6 @@
 
 .about-body {
   width: 95%;
-  max-width: 440px;
   margin: 0 auto;
 }
 
