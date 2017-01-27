@@ -19,15 +19,18 @@
     <div class="game-inform">
         <div class="bum inform-bum timer-bum">
             <img src="/assets/img/clock.png">
-            <h2><app-game-timer [start]="status.gameStart" [over]="status.gameOver"></app-game-timer></h2>
+            <h2>
+                <app-game-timer [start]="gameService.Status.gameStart"
+                                [over]="gameService.Status.gameOver"></app-game-timer>
+            </h2>
         </div>
         <div class="bum inform-bum">
             <img src="/assets/img/bomb_fear.png">
-            <h3>99</h3>
+            <h3>{{chosenLevel.mines}}</h3>
         </div>
         <div class="bum inform-bum">
             <img src="/assets/img/flag.png">
-            <h3>{{status.flags}}</h3>
+            <h3>{{gameService.Status.flags}}</h3>
         </div>
     </div>
 </div>

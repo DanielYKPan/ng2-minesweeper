@@ -19,12 +19,11 @@ export class GameBoardComponent implements OnInit, OnDestroy {
     tiles$: Observable<Tile[]>;
     chosenLevel: ILevel;
     levels: ILevel[];
-    status: IGameStatus;
 
     private gameStatusSub: Subscription;
 
-    constructor( private gameLevel: GameLevelService,
-                 private gameService: GameService,
+    constructor( public gameService: GameService,
+                 private gameLevel: GameLevelService,
                  private store: Store<any> ) {
     }
 
@@ -51,11 +50,10 @@ export class GameBoardComponent implements OnInit, OnDestroy {
     newGame(): void {
         this.gameService.newGame();
         this.chosenLevel = this.gameLevel.GameLevel;
-        this.status = this.gameService.Status;
     }
 
     clickTile( tile: Tile, isRightClick: boolean = false ): void {
-        if (!this.status.gameStart)
+        if (!this.gameService.Status.gameStart)
             this.gameService.startGame();
         isRightClick ? this.gameService.coverTile(tile) : this.gameService.clickTile(tile);
     }
