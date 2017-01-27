@@ -2,7 +2,7 @@
 @import '../../../styles/utils/functions';
 @import '../../../styles/utils/mixins';
 
-$tile-width: 3rem;
+$tile-width: 2rem;
 
 $colors: #ff00af, // 1
 #47f01c, // 2
@@ -29,12 +29,12 @@ $colors: #ff00af, // 1
   box-shadow: inset 0px 0px .3px 2px rgba(0,0,0,1);
 
   &.unknown {
-    background-color: #62b2fe;
+    background-color: #ffa711;
       border: 2px solid;
-      border-color: #68cdff #3d5482 #3d5482 #68cdff;
+      border-color: #ffd285 #784b00 #784b00 #ffd285;
       box-shadow: none;
       &:hover {
-        border-color: #3d5482 #68cdff #68cdff #3d5482;
+        border-color: #784b00 #ffd285 #ffd285 #784b00;
       }
   }
 
@@ -43,7 +43,7 @@ $colors: #ff00af, // 1
   }
 
   .tile-content {
-    @include type-setting(2);
+    @include type-setting(1);
     display: flex;
     align-items: center;
     justify-content: center;

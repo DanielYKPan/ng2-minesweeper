@@ -2,10 +2,10 @@
  * game-board.component
  */
 
-import { Component, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Observable, Subscription } from "rxjs";
 import { Store } from "@ngrx/store";
-import { GameLevelService, GameService, Tile, ILevel, IGameStatus  } from "../service";
+import { GameLevelService, GameService, Tile, ILevel, IGameStatus, gameStatus  } from "../service";
 
 @Component({
     selector: 'app-game-board',
@@ -13,11 +13,15 @@ import { GameLevelService, GameService, Tile, ILevel, IGameStatus  } from "../se
     styleUrls: ['./game-board.component.scss']
 })
 
-export class GameBoardComponent implements OnInit {
+export class GameBoardComponent implements OnInit, OnDestroy {
+
 
     tiles$: Observable<Tile[]>;
     chosenLevel: ILevel;
     status: IGameStatus;
+
+    private gameStatusSub: Subscription;
+
     constructor( private gameLevel: GameLevelService,
                  private gameService: GameService,
                  private store: Store<any>) {
@@ -26,6 +30,20 @@ export class GameBoardComponent implements OnInit {
     ngOnInit(): void {
         this.newGame();
         this.tiles$ = this.store.select('tiles');
+        this.gameStatusSub = this.tiles$
+            .let(gameStatus())
+            .distinctUntilChanged(
+                ( a: IGameStatus, b: IGameStatus ) => {
+                    return a.gameWon == b.gameWon && a.gameOver == b.gameOver && a.flags == b.flags;
+                }) // Use distinctUntilChanged to check if the gameStatus has changed
+            .subscribe(
+                ( data: IGameStatus ) => this.gameService.changeGameStatus(data)
+            );
+    }
+
+    ngOnDestroy(): void {
+        if(this.gameStatusSub)
+            this.gameStatusSub.unsubscribe()
     }
 
     newGame(): void {
