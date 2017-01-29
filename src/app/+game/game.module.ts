@@ -14,7 +14,6 @@ import { GameService, GameLevelService, tiles } from "./service";
 import { GameTileComponent } from "./game-tile";
 import { GameTimerComponent } from "./game-timer";
 import { GameAboutComponent, SocialBtnComponent } from "./game-about";
-import { GameTestComponent } from "./test";
 
 @NgModule({
     imports: [
@@ -31,7 +30,6 @@ import { GameTestComponent } from "./test";
         GameTileComponent,
         GameTimerComponent,
         GameAboutComponent,
-        GameTestComponent,
         SocialBtnComponent
     ],
     exports: [],

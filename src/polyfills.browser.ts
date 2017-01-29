@@ -32,6 +32,9 @@ import 'zone.js/dist/zone';
 // Typescript emit helpers polyfill
 import 'ts-helpers';
 
+// Web animations for Safari and Firefox #10420
+import 'web-animations-js';
+
 if ('production' === ENV) {
   // Production
 
