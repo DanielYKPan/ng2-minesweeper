@@ -4,8 +4,10 @@
 
 :host {
   display: flex;
+  position: absolute;
   flex: 1;
   color: $text-color;
+  width: 100%;
   height: 100%;
   justify-content: center;
 }
