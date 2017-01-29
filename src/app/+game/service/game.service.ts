@@ -77,8 +77,8 @@ export class GameService {
     }
 
     /*
-    * Cover or uncover a tile
-    * */
+     * Cover or uncover a tile
+     * */
     public coverTile( tile: Tile ): void {
         if (tile.Revealed || this.status.gameOver) return;
 
@@ -95,11 +95,11 @@ export class GameService {
     }
 
     /*
-    * Set the game status gameStart to true
-    *
-    * this gameStart is a flag to inform game timer
-    * to start the timer once it set to true
-    * */
+     * Set the game status gameStart to true
+     *
+     * this gameStart is a flag to inform game timer
+     * to start the timer once it set to true
+     * */
     public startGame(): void {
         this.status.gameStart = true;
     };
@@ -115,8 +115,8 @@ export class GameService {
     }
 
     /*
-    * Reveal all tiles that are not covered or already revealed
-    * */
+     * Reveal all tiles that are not covered or already revealed
+     * */
     private revealAll(): void {
         this.store.dispatch({type: REVEAL_ALL});
     }
@@ -139,11 +139,11 @@ export class GameService {
     }
 
     /*
-    * Set every tiles' content
-    *
-    * set every tile's content in the initial tiles array,
-    * after the initial tiles array has added mine tiles and being shuffled.
-    * */
+     * Set every tiles' content
+     *
+     * set every tile's content in the initial tiles array,
+     * after the initial tiles array has added mine tiles and being shuffled.
+     * */
     private setTilesContent( tiles: Tile[] ): Tile[] {
         tiles.map(( tile: Tile, index: number ) => {
 
@@ -179,13 +179,13 @@ export class GameService {
     private hitNonMineTile( tile: Tile ): void {
         // if the tile is not revealed or covered,
         // we reveal the tile
-        if(!tile.Revealed && !tile.Covered) {
+        if (!tile.Revealed && !tile.Covered) {
             this.store.dispatch({type: REVEAL_TILE, payload: tile.Id});
 
             // it the tile is a blank tile,
             // we also reveal all its surrounding non mine tiles
-            if(tile.Content === null) {
-                this.getNeighbourTiles(tile, (t) => {
+            if (tile.Content === null) {
+                this.getNeighbourTiles(tile, ( t ) => {
                     if (t.Content !== 'mine') {
                         this.hitNonMineTile(t);
                     }
@@ -197,8 +197,8 @@ export class GameService {
     }
 
     /*
-    * Get a tile's surrounding tiles
-    * */
+     * Get a tile's surrounding tiles
+     * */
     private getNeighbourTiles( tile: Tile, cb: ( t: Tile ) => any, tiles?: Tile[], ) {
         for (let tp of TraversalPaths) {
             let neighbour_x = tile.Coordination.x + tp.x,

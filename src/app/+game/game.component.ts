@@ -23,8 +23,11 @@ export class GameComponent implements OnInit {
     }
 
     newGame() {
-        this.router.navigate(['']);
-        this.gameService.newGame();
+        if(this.router.url == '/game') {
+            this.gameService.newGame();
+        } else {
+            this.router.navigate(['/game']);
+        }
     }
 
     checkAbout() {
