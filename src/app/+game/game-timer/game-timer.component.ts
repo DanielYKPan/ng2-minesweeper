@@ -2,7 +2,7 @@
  * game-timer.component
  */
 
-import { Component, OnDestroy, Input, OnChanges, SimpleChanges, OnInit } from "@angular/core";
+import { Component, OnDestroy, Input, OnChanges, SimpleChanges, OnInit, Output, EventEmitter } from "@angular/core";
 
 @Component({
     selector: 'app-game-timer',
@@ -16,6 +16,7 @@ export class GameTimerComponent implements OnInit, OnDestroy, OnChanges {
 
     @Input() start: boolean;
     @Input() over: boolean;
+    @Output() onTimerStop = new EventEmitter<number>();
 
     seconds: number;
     private intervalId: number;
@@ -43,6 +44,7 @@ export class GameTimerComponent implements OnInit, OnDestroy, OnChanges {
         // When 'over' changes to true,
         // it means the game is over and we clear the game timer
         if (changes['over'] && changes['over'].currentValue) {
+            this.onTimerStop.emit(this.seconds);
             this.clearTimer();
         }
 

@@ -23,6 +23,7 @@ const TraversalPaths = [
 ];
 
 export interface IGameStatus {
+    best?: number;
     gameStart?: boolean;
     gameOver: boolean;
     gameWon: boolean;
@@ -115,6 +116,16 @@ export class GameService {
     }
 
     /*
+     * Store the best record into local storage
+     * */
+    setBestRecord( time: number ): void {
+        if (this.status.gameWon && ( this.status.best == null || time < this.status.best)) {
+            this.status.best = time;
+            localStorage.setItem('minesweeper-best-' + this.gameLevel.GameLevel.name, time.toString());
+        }
+    }
+
+    /*
      * Reveal all tiles that are not covered or already revealed
      * */
     private revealAll(): void {
@@ -168,6 +179,7 @@ export class GameService {
     /* Reset the game status */
     private resetGameStatus() {
         this.status = {
+            best: +localStorage.getItem('minesweeper-best-' + this.gameLevel.GameLevel.name) || null,
             gameStart: false,
             gameOver: false,
             gameWon: false,

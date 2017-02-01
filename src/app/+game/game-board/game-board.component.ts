@@ -53,13 +53,17 @@ export class GameBoardComponent implements OnInit, OnDestroy {
     }
 
     clickTile( tile: Tile, isRightClick: boolean = false ): void {
-        if (!this.gameService.Status.gameStart)
-            this.gameService.startGame();
+        if (!this.gameService.Status.gameStart) this.gameService.startGame();
         isRightClick ? this.gameService.coverTile(tile) : this.gameService.clickTile(tile);
     }
 
     changeGameLevel( level: ILevel ): void {
         this.gameLevel.GameLevel = level;
         this.newGame();
+    }
+
+    setGameTime(time: number): void {
+        this.gameService.setBestRecord(time);
+        return;
     }
 }
