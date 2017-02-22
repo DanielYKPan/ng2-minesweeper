@@ -14,7 +14,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from "@angular/core";
 export class GameAboutComponent implements OnInit {
 
     socialBtns: Array<{path: string, href: string}> = [
-        {path: '/assets/img/github.svg', href: 'https://github.com/DanielYKPan'},
+        {path: '/assets/img/github.svg', href: 'https://github.com/DanielYKPan/ng2-minesweeper'},
         {path: '/assets/img/twitter.svg', href: 'https://twitter.com/DanielYKPan'},
         {path: '/assets/img/paper-plane.svg', href: 'mailto:myron.yk.pan@gmail.com'},
     ];
